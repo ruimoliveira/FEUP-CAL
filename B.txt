@@ -1,0 +1,90 @@
+32111409;Rua da Igreja;False
+32726742;Rua de São Pedro;False
+32726801;Rua dos Gaios;False
+35910913;Rua 1;False
+36333613;Rua 2;False
+38329790;Rua Santos Minho;False
+38376593;Rua José Malagueira;False
+38376609;Rua das Hortas;False
+38376638;Travessa das Hortas;False
+38376660;Rua da Ponte;False
+38503336;Rua Manuel Silva;False
+38503362;Rua da Cidade do Porto;False
+38503419;Rua João Dias;False
+38503666;Rua 3;False
+41842002;Rua de Camilo;False
+41842696;Rua Doutor Leonardo Coimbra;False
+41890363;Rua 4;False
+41890364;Rua 5;False
+42108266;Rua 6;False
+42108295;Rua de Elias Garcia;False
+106462228;Rua 7;False
+106462255;Rua 8;False
+166173444;Rua Tenente Valadim;False
+166173445;Rua Tenente Valadim;True
+166174650;Rua 9;False
+166178028;Rua 10;False
+169908809;Rua Primeiro de Maio;False
+169908815;Rua 11;False
+169908817;Rua 12;False
+169908845;Rua 13;False
+169908876;Rua 14;False
+169908901;Rua 15;False
+169908902;Rua da Portela;False
+169908905;Rua 16;False
+169908953;Rua 17;False
+169908966;Rua Padre José Brenha;False
+169908969;Rua 18;False
+169908972;Rua 19;False
+169908976;Rua 20;False
+173538931;Rua da Amadinha;False
+173538936;Rua 21;False
+173538937;Rua 22;False
+173538942;Rua 23;False
+173538945;Rua 24;False
+173538948;Rua 25;False
+173538949;Rua Professor Leopoldino Loureiro;False
+193639929;Rua 26;False
+198510612;Rua 27;False
+198510614;Rua 28;False
+198510616;Rua do Quingosta;False
+198510622;Rua do Cidral;False
+198510624;Rua 29;False
+198510626;Rua de Carlos Alberto;False
+198511066;Rua Senhora do Monte;False
+202442755;Rua Fernando Barbosa;False
+202442756;Rua Madre de Deus;False
+202442757;Rua da Moita;False
+202442758;Rua da Moita;False
+211559577;Rua 30;False
+213541576;Rua 31;False
+213920974;Rua de Elias Garcia;False
+213920976;Rua de Elias Garcia;False
+219534481;Praça do Almada;True
+228154174;Rua 32;True
+254833618;Avenida Mouzinho de Albuquerque;True
+261461128;Rua 33;False
+261461129;Rua 34;False
+261461131;Rua Doutor Sousa Campos;False
+261461133;Praça do Almada;True
+273386522;Rua Visconde de Azevedo;False
+273386523;Rua Primeiro de Maio;False
+371452305;Rua de Portela;False
+441943800;Rua Primeiro de Maio;False
+441943801;Rua 35;False
+441943802;Rua Primeiro de Maio;True
+441946252;Rua da Moita;False
+441946253;Rua do Quingosta;False
+441946829;Rua Rocha Peixoto;False
+442509064;Rua 36;False
+442509065;Rua 37;False
+442509066;Rua 38;False
+442760214;Rua 39;False
+442761452;Rua 40;False
+442761453;Rua 41;False
+459428867;Rua Almirante Reis;True
+459428869;Praça do Almada;True
+459428871;Rua Paulo Barreto;True
+459428873;Rua 42;True
+459428874;Rua Gomes de Amorim;True
+459428875;Avenida Mouzinho de Albuquerque;True
