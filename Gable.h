@@ -14,8 +14,11 @@ class Gable {
 	long long roadID, startID, finishID;
 public:
 	Gable(long long roadID, long long startID, long long finishID);
-	~Gable();
+	~Gable(){};
 	void printInfo();
+	long long getFinishId() const;
+	long long getRoadId() const;
+	long long getStartId() const;
 };
 
 #endif /* GABLE_H_ */
