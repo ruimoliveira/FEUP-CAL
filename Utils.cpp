@@ -197,15 +197,17 @@ void Utils::printMap(Graph<Node, Road> * map){
 }
 
 
-void Utils::displayGraph(vector< Vertex<Node,Road> > nodes){
+void Utils::displayGraph(vector< Vertex<Node,Road> > nodes){ /*este vector nodes ...*/
 	GraphViewer *gv = new GraphViewer(600, 600, true);
 	gv->createWindow(1600, 900);
 	gv->defineEdgeColor(ORANGE);
 	gv->defineVertexColor(BLUE);
 	gv->defineEdgeCurved(false);
 
+	/*...e' diferente do vector destes iteradores...*/
 	typename vector<Node>::iterator it_node = nodes.begin();
 	typename vector<Node>::iterator ite_node = nodes.end();
+	/*... sim, quando me apercebi tambem ponderei o suicidio.*/
 	int x, y;
 	double minLat = nodes[0].getInfo().getxDeg(),
 		maxLat = nodes[0].getInfo().getxDeg(),
@@ -236,4 +238,4 @@ void Utils::displayGraph(vector< Vertex<Node,Road> > nodes){
 		 gv->addNode(it_node->getId(), x, -y);
 	}
 
-m}
+}
