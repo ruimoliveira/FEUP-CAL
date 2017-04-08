@@ -46,7 +46,7 @@ unsigned short int menuUrgencias()
 	cout << TAB << "1 - Enviar INEM a um destino" << endl;
 	cout << TAB << "2 - Enviar Policia a um destino" << endl;
 	cout << TAB << "3 - Enviar Bombeiros a um destino" << endl;
-	cout << TAB << "0 - Sair do programa" << endl;
+	cout << TAB << "0 - Voltar" << endl;
 	cout << endl;
 	cout << "Escreva aqui a sua opcao: ";
 	getline(cin, temp);
@@ -76,7 +76,7 @@ unsigned short int menuInformacoes()
 	cout << TAB << "3 - Imprimir informacoes sobre a frota da Policia" << endl;
 	cout << TAB << "4 - Imprimir informacoes sobre a frota dos Bombeiros" << endl;
 	cout << TAB << "5 - Ver mapa" << endl;
-	cout << TAB << "0 - Sair do programa" << endl;
+	cout << TAB << "0 - Voltar" << endl;
 	cout << endl;
 	cout << "Escreva aqui a sua opcao: ";
 	getline(cin, temp);

@@ -14,13 +14,15 @@
 #include "Gable.h"
 #include "Graph.h"
 using namespace std;
+#include "Facility.h"
 
 class Urgencies {
 	Graph<Node, Road> * map;
+	vector<Facility> facilities;
 public:
 	Urgencies();
 	~Urgencies(){};
-	Urgencies(Graph<Node, Road> * map);
+	Urgencies(Graph<Node, Road> * map, vector<Facility> facilities);
 	Graph<Node, Road> * getMap();
 	double getPathDistance(Node startNode, Node finishNode);
 	Node getNode(long long nodeId);

@@ -22,7 +22,7 @@ using namespace std;
 class Facility {
 	int id;
 	string type;
-	Node position;
+	Node * position;
 	vector<Vehicle> vehicles;
 public:
 	/**
@@ -40,13 +40,11 @@ public:
 	 * @param id
 	 * Facility id.
 	 * @param type
-	 * Facility type should be set to HOSPITAL, POLICE, FIRESTATION.
+	 * Facility type should be set to HOSPITAL, POLICESTATION, FIRESTATION.
 	 * @param position
 	 * Node where the facility is located.
-	 * @param vehicles
-	 * Vehicles that operate from this facility.
 	 */
-	Facility(int id, string type, Node position, vector<Vehicle> police);
+	Facility(int id, string type, Node * node);
 
 	/**
 	 * @brief Gets the ID of the Facility.
@@ -56,7 +54,7 @@ public:
 	/**
 	 * @brief Gets the position of the Facility.
 	 */
-	const Node& getPosition() const;
+	const Node* getPosition() const;
 
 	/**
 	 * @brief Gets the type the Facility.
@@ -67,6 +65,18 @@ public:
 	 * @brief Gets the vehicles of this Facility.
 	 */
 	vector<Vehicle> getVehicles();
+
+	/**
+	 * @brief Sets the vehicles of this Facility.
+	 */
+	void setVehicles(const vector<Vehicle>& vehicles) {
+		this->vehicles = vehicles;
+	}
+
+	/**
+	 * @brief Prints Facility information.
+	 */
+	void printInfo();
 };
 
 #endif /* FACILITY_H_ */

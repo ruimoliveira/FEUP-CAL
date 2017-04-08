@@ -2,19 +2,19 @@
 
 using namespace std;
 
-Gable::Gable(long long roadID, long long startID, long long finishID) :
+Gable::Gable(unsigned long long roadID, unsigned long long startID, unsigned long long finishID) :
 		roadID(roadID), startID(startID), finishID(finishID) {
 }
 
-long long Gable::getFinishId() const {
+unsigned long long Gable::getFinishId() const {
 	return finishID;
 }
 
-long long Gable::getRoadId() const {
+unsigned long long Gable::getRoadId() const {
 	return roadID;
 }
 
-long long Gable::getStartId() const {
+unsigned long long Gable::getStartId() const {
 	return startID;
 }
 

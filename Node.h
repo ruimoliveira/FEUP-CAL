@@ -10,15 +10,15 @@
 
 class Node {
 private:
-	long long id;
+	unsigned long long id;
 	double xDeg, yDeg, xRad, yRad;
 public:
 	Node();
-	Node(long long id, double xDeg, double yDeg, double xRad, double yRad);
-	Node(long long id);
+	Node(unsigned long long id, double xDeg, double yDeg, double xRad, double yRad);
+	Node(unsigned long long id);
 	~Node(){};
 	void printInfo();
-	long long getId() const;
+	unsigned long long getId() const;
 	double getxDeg() const;
 	double getxRad() const;
 	double getyDeg() const;

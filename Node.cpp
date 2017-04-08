@@ -9,13 +9,13 @@ Node::Node(){
 
 }
 
-Node::Node(long long id, double xDeg, double yDeg, double xRad, double yRad) :
+Node::Node(unsigned long long id, double xDeg, double yDeg, double xRad, double yRad) :
 		id(id), xDeg(xDeg), yDeg(yDeg), xRad(xRad), yRad(yRad) {
 }
 
-Node::Node(long long id): id(id){}
+Node::Node(unsigned long long id): id(id){}
 
-long long Node::getId() const {
+unsigned long long Node::getId() const {
 	return id;
 }
 

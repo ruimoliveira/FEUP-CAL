@@ -24,27 +24,31 @@ class Utils {
 	vector<Node> nodes;
 	vector<Road> roads;
 	vector<Gable> connections;
+	vector<Facility> facilities;
 public:
 	Utils(){};
 	~Utils(){};
 	vector<Node> loadNodes();
 	vector<Road> loadRoads();
 	vector<Gable> loadConnections();
+	vector<Facility> loadFacilities();
 	double nodeDistance(Node start, Node finish);
 	Graph<Node, Road> * loadMap();
 	void printMap(Graph<Node, Road> * map);
-	Node getNode(long long nodeId);
-	long long getEdgeID(long long startId, long long finishId);
 	void displayGraph();
 	vector<Vertex<Node, Road> *> getBestPath(Graph<Node,Road> map, Node start, Node finish, int algorithm);
 	void displayPath(Graph<Node,Road> map, Node start, Node finish, int algorithm);
 	void printGraphInfo();
 	double calculaDistanciaVetorVertex(vector<Vertex<Node, Road> *> v);
+	Node getNode(unsigned long long nodeId);
+	unsigned long long getEdgeID(unsigned long long startId, unsigned long long finishId);
 
 	vector<Node> getNodes(){return this->nodes;};
 	vector<Road> getRoads(){return this->roads;};
 	vector<Gable> getConnections(){return this->connections;};
+	const vector<Facility>& getFacilities() const {return this->facilities;}
 
+	;
 };
 
 #endif /* UTILS_H_ */

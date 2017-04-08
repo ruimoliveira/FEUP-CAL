@@ -1,10 +1,10 @@
 #include "Road.h"
 
-Road::Road(long long id, string name, bool twoWay): id(id), name(name), twoWay(twoWay){}
+Road::Road(unsigned long long id, string name, bool twoWay): id(id), name(name), twoWay(twoWay){}
 
-Road::Road(long long id): id(id){}
+Road::Road(unsigned long long id): id(id){}
 
-long long Road::getId() const {
+unsigned long long Road::getId() const {
 	return id;
 }
 

@@ -1,7 +1,4 @@
 #include <vector>
-#include "Graph.h"
-#include "Node.h"
-#include "Road.h"
 #include "Utils.h"
 #include "Urgencies.h"
 #include "Menu.h"
@@ -14,7 +11,7 @@ int main() {
 	cout << "PRINT MENU" << endl;
 
 	Utils util = Utils();
-	Urgencies nineOneOne = Urgencies(util.loadMap());
+	Urgencies nineOneOne = Urgencies(util.loadMap(), util.getFacilities());
 
 	opcoesIniciais(util, nineOneOne);
 

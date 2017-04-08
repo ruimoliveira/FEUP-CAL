@@ -15,13 +15,13 @@ using namespace std;
  */
 class Gable {
 	/** ID of the road that's connecting two nodes. **/
-	long long roadID;
+	unsigned long long roadID;
 
 	/** ID of the 1st node the road is connecting. **/
-	long long startID;
+	unsigned long long startID;
 
 	/** ID of the 2nd node the road is connecting. **/
-	long long finishID;
+	unsigned long long finishID;
 public:
 	/**
 	 * @brief Gable default constructor. Has no parameters.
@@ -40,13 +40,13 @@ public:
 	 * @param startID ID of the 1st node that is getting connected.
 	 * @param finishID ID of the 2nd node that is getting connected.
 	 */
-	Gable(long long roadID, long long startID, long long finishID);
+	Gable(unsigned long long roadID, unsigned long long startID, unsigned long long finishID);
 
 
 	void printInfo();
-	long long getFinishId() const;
-	long long getRoadId() const;
-	long long getStartId() const;
+	unsigned long long getFinishId() const;
+	unsigned long long getRoadId() const;
+	unsigned long long getStartId() const;
 };
 
 #endif /* GABLE_H_ */

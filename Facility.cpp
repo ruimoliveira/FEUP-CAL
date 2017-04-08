@@ -9,7 +9,7 @@
 
 Facility::Facility() {}
 
-Facility::Facility(int id, string type, Node position, vector<Vehicle> vehicles): id(id), type(type), position(position), vehicles(vehicles){}
+Facility::Facility(int id, string type, Node * position): id(id), type(type), position(position){}
 
 Facility::~Facility() {}
 
@@ -21,10 +21,18 @@ vector<Vehicle> Facility::getVehicles(){
 	return this->vehicles;
 }
 
-const Node& Facility::getPosition() const {
-	return position;
-}
-
 const string& Facility::getType() const {
 	return type;
+}
+
+const Node* Facility::getPosition() const {
+	return this->position;
+}
+
+void Facility::printInfo(){
+	cout << "Facility: id (" << this->id << ") - type(" << this->type << ") - position("
+			<< this->position->getId() << ") - vehicles:" << endl;
+	for(unsigned int i=0; i<this->vehicles.size(); i++){
+		cout << "	" << vehicles[i].getId() << "	" << vehicles[i].getType() << endl;
+	}
 }

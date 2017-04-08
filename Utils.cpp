@@ -12,7 +12,7 @@ vector<Node> Utils::loadNodes(){
 	char sep;
 
 	string line;
-	long long id;
+	unsigned long long id;
 	double xDeg, yDeg, xRad, yRad;
 
 	while( !file.eof() ){
@@ -59,7 +59,7 @@ vector<Road> Utils::loadRoads(){
 	char sep;
 
 	string line, name, boolean;
-	long long id;
+	unsigned long long id;
 	bool twoWay;
 
 	while( !file.eof() ){
@@ -113,7 +113,7 @@ vector<Gable> Utils::loadConnections(){
 	char sep;
 
 	string line;
-	long long roadID, nodeID1, nodeID2;
+	unsigned long long roadID, nodeID1, nodeID2;
 
 	while( !file.eof() ){
 
@@ -145,6 +145,93 @@ vector<Gable> Utils::loadConnections(){
 	return connections;
 }
 
+vector<Facility> Utils::loadFacilities(){
+	vector<Facility> facilities;
+	for(unsigned int z=0; z<3; z++){
+		ifstream file;
+		string filename;
+
+		string type;
+		switch(z){
+		case 0:
+			filename = "Hospitals.txt";
+			type = "HOSPITAL";
+			break;
+		case 1:
+			filename = "FireStations.txt";
+			type = "FIRESTATION";
+			break;
+		case 2:
+			filename = "PoliceStations.txt";
+			type = "POLICESTATION";
+			break;
+		}
+
+		file.open(filename.c_str(),ifstream::in);
+
+		char sep;
+
+		string line, aux, vehicleType;
+		int vehicleID, facilityID;
+		vector<Vehicle> vehicles;
+		Node vehiclePosition, facilityPosition;
+		unsigned long long position;
+
+		while( !file.eof() ){
+			stringstream ss;
+			getline(file, line);
+			if(line == "") continue;
+
+			aux = line.substr(0, line.find(";"));
+			line = line.substr(line.find(";")+1, string::npos);
+
+			if(aux.compare("hspt") == 0 || aux.compare("ps") == 0 || aux.compare("fs") == 0){
+				aux = line.substr(0, line.find(";"));
+				facilityID = atoi(aux.c_str());
+				line = line.substr(line.find(";")+1, string::npos);
+				ss.str(line);
+				ss >> position >> sep;
+
+			} else if (aux.compare("next") == 0) {
+				Facility * facility;
+				for(unsigned int i=0; i<this->nodes.size(); i++){
+					if(nodes[i].getId() == position){
+						facility = new Facility(facilityID, type, &nodes[i]);
+						break;
+					}
+				}
+				facility->setVehicles(vehicles);
+				facilities.push_back(*facility);
+				while(vehicles.size() != 0)
+					vehicles.erase(vehicles.begin());
+
+		        ss.clear();
+		        ss.str("");
+			} else {
+				vehicleID = atoi(aux.c_str());
+				//line = line.substr(line.find(";")+1, string::npos);
+				vehicleType = line.substr(0, line.find(";"));
+				line = line.substr(line.find(";")+1, string::npos);
+				ss.str(line);
+				ss >> position >> sep;
+
+				for(unsigned int i=0; i<this->nodes.size(); i++){
+					if(nodes[i].getId() == position){
+						Vehicle vehicle = Vehicle(vehicleID, vehicleType, nodes[i]);
+						vehicles.push_back(vehicle);
+						break;
+					}
+				}
+			}
+
+			//cout << roadID << ";" << nodeID1 << ";" << nodeID2 << endl;
+
+		}
+	}
+
+	return facilities;
+}
+
 /*Code from http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula*/
 double Utils::nodeDistance(Node start, Node finish){
 	int earthRadius = 6371; // Radius of the earth in km
@@ -163,6 +250,7 @@ Graph<Node, Road> * Utils::loadMap(){
 	this->nodes = loadNodes();
 	this->roads = loadRoads();
 	this->connections = loadConnections();
+	this->facilities = loadFacilities();
 
 	Graph<Node, Road> * map = new Graph<Node, Road>();
 
@@ -196,7 +284,7 @@ void Utils::printMap(Graph<Node, Road> * map){
 	}
 }
 
-Node Utils::getNode(long long nodeId){
+Node Utils::getNode(unsigned long long nodeId){
 	Graph<Node, Road> * map = loadMap();
 	typename vector<Vertex<Node, Road> *>::iterator it_graph = map->getVertexSet().begin();
 	typename vector<Vertex<Node, Road> *>::iterator ite_graph = map->getVertexSet().end();
@@ -210,7 +298,7 @@ Node Utils::getNode(long long nodeId){
 	return Node(-1);
 }
 
-long long Utils::getEdgeID(long long startId, long long finishId){
+unsigned long long Utils::getEdgeID(unsigned long long startId, unsigned long long finishId){
 	Graph<Node, Road> * map = loadMap();
 	Node start = getNode(startId);
 
@@ -290,7 +378,7 @@ void Utils::displayGraph(){
 	typename vector<Gable>::iterator it_gable = connections.begin();
 	typename vector<Gable>::iterator ite_gable = connections.end();
 
-	long long auxId = 1;
+	unsigned long long auxId = 1;
 
 	for (; it_gable != ite_gable; it_gable++) {
 
