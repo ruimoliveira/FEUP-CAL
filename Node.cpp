@@ -5,6 +5,10 @@
 
 using namespace std;
 
+Node::Node(){
+
+}
+
 Node::Node(long long id, double xDeg, double yDeg, double xRad, double yRad) :
 		id(id), xDeg(xDeg), yDeg(yDeg), xRad(xRad), yRad(yRad) {
 }

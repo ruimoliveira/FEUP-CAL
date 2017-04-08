@@ -13,6 +13,7 @@ private:
 	long long id;
 	double xDeg, yDeg, xRad, yRad;
 public:
+	Node();
 	Node(long long id, double xDeg, double yDeg, double xRad, double yRad);
 	Node(long long id);
 	~Node(){};

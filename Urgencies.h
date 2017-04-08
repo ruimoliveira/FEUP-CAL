@@ -18,8 +18,10 @@ using namespace std;
 class Urgencies {
 	Graph<Node, Road> * map;
 public:
-	Urgencies(Graph<Node, Road> * map);
+	Urgencies();
 	~Urgencies(){};
+	Urgencies(Graph<Node, Road> * map);
+	Graph<Node, Road> * getMap();
 };
 
 #endif /* URGENCIES_H_ */

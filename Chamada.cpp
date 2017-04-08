@@ -9,27 +9,38 @@
 
 Chamada::Chamada() {
 	// TODO Auto-generated constructor stub
-
 }
 
 Chamada::~Chamada() {
 	// TODO Auto-generated destructor stub
 }
 
-Chamada::Chamada(Posicao localidade, unsigned int grauUrgencia, string motivo){
-	this->localidade = localidade;
-	this->grauUrgencia = grauUrgencia;
+Chamada::Chamada(Node posicao, string motivo){
+	this->posicao = posicao;
+	//this->grauUrgencia = grauUrgencia;
 	this->motivo = motivo;
 }
 
-Posicao Chamada::getLocalidade(){
-	return this->localidade;
+Node Chamada::getPosicao(){
+	return this->posicao;
 }
 
-unsigned int Chamada::getGrauUrgencia(){
+/*unsigned int Chamada::getGrauUrgencia(){
 	return this->grauUrgencia;
-}
+}*/
 
 string Chamada::getMotivo(){
 	return this->motivo;
+}
+
+void Chamada::setPosicao(Node posicao){
+	this->posicao = posicao;
+}
+
+/*void Chamada::setGrauUrgencia(unsigned int grauUrgencia){
+	this->grauUrgencia = grauUrgencia;
+}*/
+
+void Chamada::setMotivo(string motivo){
+	this->motivo = motivo;
 }

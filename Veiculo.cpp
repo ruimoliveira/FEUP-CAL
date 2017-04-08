@@ -9,16 +9,16 @@
 
 Veiculo::Veiculo() {
 	// TODO Auto-generated constructor stub
-
 }
 
 Veiculo::~Veiculo() {
 	// TODO Auto-generated destructor stub
 }
 
-Veiculo::Veiculo(string tipo, bool disponibilidade){
+Veiculo::Veiculo(string tipo, bool disponibilidade, Node posicao){
 	this->tipo = tipo;
 	this->disponibilidade = disponibilidade;
+	this->posicao = posicao;
 }
 
 string Veiculo::getTipo(){
@@ -29,7 +29,7 @@ bool Veiculo::getDisponibilidade(){
 	return this->disponibilidade;
 }
 
-Posicao Veiculo::getPosicao(){
+Node Veiculo::getPosicao(){
 	return this->posicao;
 }
 
@@ -41,6 +41,6 @@ void Veiculo::setDisponibilidade(bool disponibilidade){
 	this->disponibilidade = disponibilidade;
 }
 
-void Veiculo::setPosicao(Posicao posicao){
+void Veiculo::setPosicao(Node posicao){
 	this->posicao = posicao;
 }

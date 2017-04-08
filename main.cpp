@@ -4,6 +4,7 @@
 #include "Road.h"
 #include "Utils.h"
 #include "Urgencies.h"
+#include "Menu.h"
 
 using namespace std;
 
@@ -15,7 +16,14 @@ int main() {
 	Utils util = Utils();
 	Urgencies nineOneOne = Urgencies(util.loadMap());
 
-	util.displayGraph()
+	//cout << util.getNodes().size() << endl << util.getRoads().size() << endl << util.getConnections().size() << endl;
+
+	//util.displayGraph(nineOneOne.getMap()->getVertexSet());
+
+	//getchar();
+
+
+	opcoesIniciais(util, nineOneOne);
 
 	return 0;
 }

@@ -6,6 +6,7 @@
  */
 
 #include <string>
+#include "Node.h"
 
 #ifndef VEICULO_H_
 #define VEICULO_H_
@@ -16,17 +17,17 @@ class Veiculo {
 private:
 	string tipo;
 	bool disponibilidade;
-	Posicao posicao;
+	Node posicao;
 public:
 	Veiculo();
 	virtual ~Veiculo();
-	Veiculo(string tipo, bool disponibilidade);
+	Veiculo(string tipo, bool disponibilidade, Node posicao);
 	string getTipo();
 	bool getDisponibilidade();
-	Posicao getPosicao();
+	Node getPosicao();
 	void setTipo(string tipo);
 	void setDisponibilidade(bool disponibilidade);
-	void setPosicao(Posicao posicao);
+	void setPosicao(Node posicao);
 };
 
 #endif /* VEICULO_H_ */

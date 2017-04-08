@@ -16,6 +16,7 @@
 #include "Node.h"
 #include "Gable.h"
 #include "Graph.h"
+#include "Urgencies.h"
 using namespace std;
 
 class Utils {
@@ -31,7 +32,13 @@ public:
 	double nodeDistance(Node start, Node finish);
 	Graph<Node, Road> * loadMap();
 	void printMap(Graph<Node, Road> * map);
-	void displayGraph(vector< Vertex< Node , Road > > nodes);
+	Node getNode(long long nodeId);
+	long long getEdgeID(long long startId, long long finishId);
+	void displayGraph(vector<Vertex<Node,Road> *> graph);
+
+	vector<Node> getNodes(){return this->nodes;};
+	vector<Road> getRoads(){return this->roads;};
+	vector<Gable> getConnections(){return this->connections;};
 
 };
 

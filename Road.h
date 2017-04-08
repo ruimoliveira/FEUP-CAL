@@ -14,6 +14,7 @@ class Road {
 	string name;
 	bool twoWay;
 public:
+	Road(){};
 	Road(long long id, string name, bool twoWay);
 	Road(long long id);
 	~Road(){};

@@ -16,23 +16,14 @@ Policia::~Policia() {
 	// TODO Auto-generated destructor stub
 }
 
-Policia::Policia(Posicao posicao, Veiculo veiculo){
-	this->posicao = posicao;
-	this->veiculo = veiculo;
+Policia::Policia(vector<Veiculo> policia){
+	this->policia = policia;
 }
 
-Posicao Policia::getPosicao(){
-	return this->posicao;
+vector<Veiculo> Policia::getPolicia(){
+	return this->policia;
 }
 
-Veiculo Policia::getVeiculo(){
-	return this->veiculo;
-}
-
-void Policia::setPosicao(Posicao posicao){
-	this->posicao = posicao;
-}
-
-void Policia::setVeiculo(Veiculo veiculo){
-	this->veiculo = veiculo;
+void Policia::setPolicia(vector<Veiculo> policia){
+	this->policia = policia;
 }

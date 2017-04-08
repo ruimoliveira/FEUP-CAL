@@ -196,27 +196,58 @@ void Utils::printMap(Graph<Node, Road> * map){
 	}
 }
 
+Node Utils::getNode(long long nodeId){
+	Graph<Node, Road> * map = loadMap();
+	typename vector<Vertex<Node, Road> *>::iterator it_graph = map->getVertexSet().begin();
+	typename vector<Vertex<Node, Road> *>::iterator ite_graph = map->getVertexSet().end();
 
-void Utils::displayGraph(vector< Vertex<Node,Road> > nodes){ /*este vector nodes ...*/
-	GraphViewer *gv = new GraphViewer(600, 600, true);
+	for (; it_graph != ite_graph; it_graph++) {
+		if((*it_graph)->getInfo().getId() == nodeId){
+			return (*it_graph)->getInfo();
+		}
+	}
+
+	return Node(-1);
+}
+
+long long Utils::getEdgeID(long long startId, long long finishId){
+	Graph<Node, Road> * map = loadMap();
+	Node start = getNode(startId);
+
+	if (start.getId() == -1){
+		return -1;
+	}
+
+	typename vector<Edge<Node, Road> >::iterator it_edges = map->getVertex(start)->getAdj().begin();
+	typename vector<Edge<Node, Road> >::iterator ite_edges = map->getVertex(start)->getAdj().end();
+
+	for (; it_edges != ite_edges; it_edges++) {
+		if((it_edges->getDest()->getInfo().getId() == finishId)){
+			return it_edges->getInfo().getId();
+		}
+	}
+
+	return -1;
+}
+
+void Utils::displayGraph(vector<Vertex <Node,Road> *> graph){
+	GraphViewer *gv = new GraphViewer(600, 600, false);
 	gv->createWindow(1600, 900);
 	gv->defineEdgeColor(ORANGE);
 	gv->defineVertexColor(BLUE);
 	gv->defineEdgeCurved(false);
 
-	/*...e' diferente do vector destes iteradores...*/
 	typename vector<Node>::iterator it_node = nodes.begin();
 	typename vector<Node>::iterator ite_node = nodes.end();
-	/*... sim, quando me apercebi tambem ponderei o suicidio.*/
 	int x, y;
-	double minLat = nodes[0].getInfo().getxDeg(),
-		maxLat = nodes[0].getInfo().getxDeg(),
-		minLon = nodes[0].getInfo().getxDeg(),
-		maxLon = nodes[0].getInfo().getxDeg(),
+	double minLat = nodes[0].getxDeg(),
+		maxLat = nodes[0].getxDeg(),
+		minLon = nodes[0].getyDeg(),
+		maxLon = nodes[0].getyDeg(),
 		lat, lon;
-	for (unsigned int i=0; i<nodes.size(); i++) {
-		lat = nodes[i].getInfo().getxDeg();
-		lon = nodes[i].getInfo().getyDeg();
+	for (unsigned int i=0; i < nodes.size(); i++) {
+		lat = nodes[i].getxDeg();
+		lon = nodes[i].getyDeg();
 
 		if(minLat>lat)
 			minLat=lat;
@@ -238,4 +269,45 @@ void Utils::displayGraph(vector< Vertex<Node,Road> > nodes){ /*este vector nodes
 		 gv->addNode(it_node->getId(), x, -y);
 	}
 
+	typename vector<Gable>::iterator it_gable = connections.begin();
+	typename vector<Gable>::iterator ite_gable = connections.end();
+
+	for (; it_gable != ite_gable; it_gable++) {
+
+		typename vector<Road>::iterator it_road;
+		it_road = find(roads.begin(), roads.end(), Road(it_gable->getRoadId()));
+		long long auxId = getEdgeID(it_gable->getStartId(), it_gable->getFinishId());
+
+		if(auxId == -1){
+			continue;
+		}
+
+		//long long auxId = 1;
+
+		if (it_road->isTwoWay()){
+			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::UNDIRECTED);
+		}
+		else{
+			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::DIRECTED);
+		}
+
+		//auxId++;
+	}
+
+	/*typename vector<Vertex <Node,Road> *>::iterator it_graph = graph.begin();
+	typename vector<Vertex <Node,Road> *>::iterator ite_graph = graph.end();
+
+	unsigned long long ID = 0;
+
+	for (; it_graph != ite_graph; it_graph++) {
+
+		vector<Edge<Node, Road> > aux = (*it_graph)->getAdj();
+		for(unsigned int i = 0; i < aux.size(); i++){
+				gv->addEdge(ID, aux[i].getInfo().getId(), aux[i].getDest()->getInfo().getId(), EdgeType::DIRECTED);
+			ID++;
+		}
+	}*/
+
+
+	gv->rearrange();
 }
