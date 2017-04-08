@@ -5,7 +5,7 @@ Urgencies::Urgencies(){
 
 }
 
-Urgencies::Urgencies(Graph<Node, Road> * map): map(map){}
+Urgencies::Urgencies(Graph<Node, Road> * map, vector<Facility> facilities): map(map), facilities(facilities){}
 
 Graph<Node, Road> * Urgencies::getMap(){
 	return this->map;
