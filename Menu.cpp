@@ -103,6 +103,9 @@ void opcoesIniciais(Utils util, Urgencies urgencies)
 	break;
 	case 2:opcoesInformacoes(util, urgencies);
 	break;
+	default:
+	opcoesIniciais(util, urgencies);
+	break;
 	}
 }
 
@@ -113,11 +116,23 @@ void opcoesUrgencias(Utils util, Urgencies urgencies)
 	while((opcao=menuUrgencias()))
 	switch (opcao)
 	{
-	case 1://enviarINEM();
+	case 1:{
+		unsigned int choice1, choice2;
+		cin >> choice1;
+		cin >> choice2;
+
+		if(choice1 < 0 || choice2 < 0 || choice1 >= util.getNodes().size() || choice2 >= util.getNodes().size()){
+			cout << "O node inserido nao existe!" << endl;
+		}
+		else choice1 >= util.getNodes().size();
+	}
 	break;
 	case 2://enviarPolicia();
 	break;
 	case 3://enviarBombeiros();
+	break;
+	default:
+	opcoesUrgencias(util, urgencies);
 	break;
 	}
 }
@@ -129,7 +144,7 @@ void opcoesInformacoes(Utils util, Urgencies urgencies)
 	while((opcao=menuInformacoes()))
 	switch (opcao)
 	{
-	case 1://printGraphInfo();
+	case 1:util.printGraphInfo();
 	break;
 	case 2://printINEMInfo();
 	break;
@@ -137,7 +152,10 @@ void opcoesInformacoes(Utils util, Urgencies urgencies)
 	break;
 	case 4://printBombeirosInfo();
 	break;
-	case 5:util.displayGraph(urgencies.getMap()->getVertexSet());
+	case 5:util.displayGraph();
+	break;
+	default:
+	opcoesInformacoes(util, urgencies);
 	break;
 	}
 }

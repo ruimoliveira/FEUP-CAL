@@ -230,7 +230,25 @@ long long Utils::getEdgeID(long long startId, long long finishId){
 	return -1;
 }
 
-void Utils::displayGraph(vector<Vertex <Node,Road> *> graph){
+
+//nodeDistance
+
+double Utils::calculaDistanciaVetorVertex(vector<Vertex<Node, Road> *> v){
+
+	double res=0;
+
+	for(int i=0; i<v.size()-1; i++){
+		Vertex<Node,Road>* a = v[i];
+		Vertex<Node,Road> * b = v[i+1];
+
+		res+=nodeDistance(a->getInfo(),b->getInfo());
+
+	}
+	return res;
+}
+
+
+void Utils::displayGraph(){
 	GraphViewer *gv = new GraphViewer(600, 600, false);
 	gv->createWindow(1600, 900);
 	gv->defineEdgeColor(ORANGE);
@@ -267,7 +285,6 @@ void Utils::displayGraph(vector<Vertex <Node,Road> *> graph){
 						/ (maxLat - minLat));
 
 		gv->addNode(it_node->getId(), x, -y);
-		gv->setVertexLabel(it_node->getId(), ".");
 	}
 
 	typename vector<Gable>::iterator it_gable = connections.begin();
@@ -282,15 +299,122 @@ void Utils::displayGraph(vector<Vertex <Node,Road> *> graph){
 
 		if (it_road->isTwoWay()){
 			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::UNDIRECTED);
-			gv->setEdgeThickness(auxId,5);
+			gv->setEdgeThickness(auxId, 5);
 		}
 		else{
 			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::DIRECTED);
-			gv->setEdgeThickness(auxId,5);
+			gv->setEdgeThickness(auxId, 5);
 		}
 
 		auxId++;
 	}
 
 	gv->rearrange();
+}
+
+vector<Vertex<Node, Road> *> Utils::getBestPath(Graph<Node,Road> map, Node start, Node finish, int algorithm){
+	switch (algorithm){
+	case 1: map.dijkstraShortestPath(start); //mais barato
+	break;
+	case 2: map.bellmanFordShortestPath(start); //mais rapido
+	break;
+	}
+
+	vector <Vertex<Node, Road> *> v = map.getPath(start, finish);
+
+	/*for(unsigned int i = 0; i < v.size(); i++){
+		if(i == v.size() - 1){
+			cout << v[i]->getInfo().getId() << endl;
+		}
+		cout << v[i]->getInfo().getId() << "->";
+	}*/
+
+	return v;
+}
+
+void Utils::displayPath(Graph<Node,Road> map, Node start, Node finish, int algorithm){
+	GraphViewer *gv = new GraphViewer(600, 600, false);
+	gv->createWindow(1600, 900);
+	gv->defineEdgeColor(ORANGE);
+	gv->defineVertexColor(BLUE);
+	gv->defineEdgeCurved(false);
+
+
+	vector <Vertex<Node, Road> *> v = getBestPath(map, start, finish, algorithm);
+	if(v.size() == 1){
+		cout << "Nao foi encontrado caminho para o seu destino." << endl;
+	}
+
+	typename vector<Node>::iterator it_node = nodes.begin();
+	typename vector<Node>::iterator ite_node = nodes.end();
+	int x, y;
+	double minLat = nodes[0].getxDeg(),
+		maxLat = nodes[0].getxDeg(),
+		minLon = nodes[0].getyDeg(),
+		maxLon = nodes[0].getyDeg(),
+		lat, lon;
+	for (unsigned int i=0; i < nodes.size(); i++) {
+		lat = nodes[i].getxDeg();
+		lon = nodes[i].getyDeg();
+
+		if(minLat>lat)
+			minLat=lat;
+		if(maxLat<lat)
+			maxLat=lat;
+		if(minLon>lon)
+			minLon=lon;
+		if(maxLon<lon)
+			maxLon=lon;
+	}
+	for (; it_node != ite_node; it_node++) {
+		x = floor(
+				((it_node->getyDeg() - minLon) * 1600)
+						/ (maxLon - minLon));
+		y = floor(
+				((it_node->getxDeg() - minLat) * 900)
+						/ (maxLat - minLat));
+
+		gv->addNode(it_node->getId(), x, -y);
+	}
+
+	typename vector<Gable>::iterator it_gable = connections.begin();
+	typename vector<Gable>::iterator ite_gable = connections.end();
+
+	long long auxId = 1;
+
+	for (; it_gable != ite_gable; it_gable++) {
+
+		typename vector<Road>::iterator it_road;
+		it_road = find(roads.begin(), roads.end(), Road(it_gable->getRoadId()));
+
+		if (it_road->isTwoWay()){
+			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::UNDIRECTED);
+			gv->setEdgeThickness(auxId, 5);
+		}
+		else{
+			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::DIRECTED);
+			gv->setEdgeThickness(auxId, 5);
+		}
+
+		auxId++;
+	}
+
+	// CHANGE PATH NODES COLOR
+	for (unsigned int i = 0; i < v.size(); i++) {
+		if(i == 0)
+			//gv->setVertexColor(v[i]->getInfo().getId(), RED);
+			gv->setVertexColor(start.getId(), RED);
+		else if(i == v.size()-1)
+			gv->setVertexColor(v[i]->getInfo().getId(), GREEN);
+		else  gv->setVertexColor(v[i]->getInfo().getId(), PINK);
+	}
+
+	gv->rearrange();
+}
+
+void Utils::printGraphInfo(){
+	cout << "O seu mapa contem " << nodes.size() << " nodes e " << roads.size() << " arestas." << endl;
+	for(unsigned int i = 0; i < connections.size(); i++){
+		cout << "Ligacao " << i+1 << ": ID da aresta - " << connections[i].getRoadId() << "  " << "ID do node de partida - " << connections[i].getStartId() << "  " << "ID do node de chegada - " << connections[i].getFinishId() << endl;
+	}
 }

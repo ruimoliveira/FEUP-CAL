@@ -16,13 +16,6 @@ int main() {
 	Utils util = Utils();
 	Urgencies nineOneOne = Urgencies(util.loadMap());
 
-	//cout << util.getNodes().size() << endl << util.getRoads().size() << endl << util.getConnections().size() << endl;
-
-	//util.displayGraph(nineOneOne.getMap()->getVertexSet());
-
-	//getchar();
-
-
 	opcoesIniciais(util, nineOneOne);
 
 	return 0;

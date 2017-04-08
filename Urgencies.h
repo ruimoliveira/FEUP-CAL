@@ -22,6 +22,8 @@ public:
 	~Urgencies(){};
 	Urgencies(Graph<Node, Road> * map);
 	Graph<Node, Road> * getMap();
+	double getPathDistance(Node startNode, Node finishNode);
+	Node getNode(long long nodeId);
 };
 
 #endif /* URGENCIES_H_ */

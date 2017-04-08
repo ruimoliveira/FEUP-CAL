@@ -11,6 +11,7 @@
 #include <queue>
 #include <algorithm>
 #include <cmath>
+#include <string>
 #include "graphviewer.h"
 #include "Road.h"
 #include "Node.h"
@@ -34,7 +35,11 @@ public:
 	void printMap(Graph<Node, Road> * map);
 	Node getNode(long long nodeId);
 	long long getEdgeID(long long startId, long long finishId);
-	void displayGraph(vector<Vertex<Node,Road> *> graph);
+	void displayGraph();
+	vector<Vertex<Node, Road> *> getBestPath(Graph<Node,Road> map, Node start, Node finish, int algorithm);
+	void displayPath(Graph<Node,Road> map, Node start, Node finish, int algorithm);
+	void printGraphInfo();
+	double calculaDistanciaVetorVertex(vector<Vertex<Node, Road> *> v);
 
 	vector<Node> getNodes(){return this->nodes;};
 	vector<Road> getRoads(){return this->roads;};

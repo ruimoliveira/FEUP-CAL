@@ -186,7 +186,7 @@ public:
 	vector<Vertex<T, U>*> getSources() const;
 	int getNumCycles();
 	vector<T, U> topologicalOrder();
-	vector<T, U> getPath(const T &origin, const T &dest);
+	vector<Vertex<T, U> *> getPath(const T &origin, const T &dest) const;
 	void unweightedShortestPath(const T &v);
 	bool isDAG();
 
@@ -498,23 +498,23 @@ vector<T, U> Graph<T, U>::topologicalOrder() {
 
 
 template <class T, class U>
-vector<T, U> Graph<T, U>::getPath(const T &origin, const T &dest){
+vector<Vertex<T, U> *> Graph<T, U>::getPath(const T &origin,
+		const T &dest) const {
 
-	list<T, U> buffer;
+	list<Vertex<T, U> *> buffer;
 	Vertex<T, U>* v = getVertex(dest);
 
-	buffer.push_front(v->info);
-	while ( v->path != NULL &&  v->path->info != origin) {
+	buffer.push_front(v);
+	while (v->path != NULL && !(v->path->info == origin)) {
 		v = v->path;
-		buffer.push_front(v->info);
+		buffer.push_front(v);
 	}
-	if( v->path != NULL )
-		buffer.push_front(v->path->info);
+	if (v->path != NULL)
+		buffer.push_front(getVertex(v->path->info));
 
-
-	vector<T, U> res;
-	while( !buffer.empty() ) {
-		res.push_back( buffer.front() );
+	vector<Vertex<T, U> *> res;
+	while (!buffer.empty()) {
+		res.push_back(buffer.front());
 		buffer.pop_front();
 	}
 	return res;
