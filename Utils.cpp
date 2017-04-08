@@ -397,6 +397,26 @@ void Utils::displayGraph(){
 		auxId++;
 	}
 
+	/* TODO: CHANGE FACILITY NODE COLOURS */
+	for(unsigned int i=0; i<this->facilities.size(); i++){
+		if(facilities[i].getType().compare("HOSPITAL") == 0){
+			cout << "node id: " << this->facilities[i].getId() << endl;
+			gv->setVertexColor(this->facilities[i].getId(),WHITE);
+			gv->setVertexLabel(this->facilities[i].getId(), "HOSPITAL");
+			it_node->printInfo();
+		} else if(facilities[i].getType().compare("POLICESTATION") == 0){
+			cout << "node id: " << this->facilities[i].getId() << endl;
+			gv->setVertexColor(this->facilities[i].getId(),BLUE);
+			gv->setVertexLabel(this->facilities[i].getId(), "POLICESTATION");
+			it_node->printInfo();
+		} else if(facilities[i].getType().compare("FIRESTATION") == 0){
+			cout << "node id: " << this->facilities[i].getId() << endl;
+			gv->setVertexColor(this->facilities[i].getId(),RED);
+			gv->setVertexLabel(this->facilities[i].getId(), "FIRESTATION");
+			it_node->printInfo();
+		}
+	}
+
 	gv->rearrange();
 }
 

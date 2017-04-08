@@ -125,6 +125,8 @@ void opcoesUrgencias(Utils util, Urgencies urgencies)
 			cout << "O node inserido nao existe!" << endl;
 		}
 		else choice1 >= util.getNodes().size();
+
+		util.displayPath(*urgencies.getMap(), util.getNodes()[choice1], util.getNodes()[choice2], 1);
 	}
 	break;
 	case 2://enviarPolicia();
