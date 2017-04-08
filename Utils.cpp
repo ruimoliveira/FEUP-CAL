@@ -266,48 +266,31 @@ void Utils::displayGraph(vector<Vertex <Node,Road> *> graph){
 				((it_node->getxDeg() - minLat) * 900)
 						/ (maxLat - minLat));
 
-		 gv->addNode(it_node->getId(), x, -y);
+		gv->addNode(it_node->getId(), x, -y);
+		gv->setVertexLabel(it_node->getId(), ".");
 	}
 
 	typename vector<Gable>::iterator it_gable = connections.begin();
 	typename vector<Gable>::iterator ite_gable = connections.end();
 
+	long long auxId = 1;
+
 	for (; it_gable != ite_gable; it_gable++) {
 
 		typename vector<Road>::iterator it_road;
 		it_road = find(roads.begin(), roads.end(), Road(it_gable->getRoadId()));
-		long long auxId = getEdgeID(it_gable->getStartId(), it_gable->getFinishId());
-
-		if(auxId == -1){
-			continue;
-		}
-
-		//long long auxId = 1;
 
 		if (it_road->isTwoWay()){
 			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::UNDIRECTED);
+			gv->setEdgeThickness(auxId,5);
 		}
 		else{
 			gv->addEdge(auxId, it_gable->getStartId(), it_gable->getFinishId(), EdgeType::DIRECTED);
+			gv->setEdgeThickness(auxId,5);
 		}
 
-		//auxId++;
+		auxId++;
 	}
-
-	/*typename vector<Vertex <Node,Road> *>::iterator it_graph = graph.begin();
-	typename vector<Vertex <Node,Road> *>::iterator ite_graph = graph.end();
-
-	unsigned long long ID = 0;
-
-	for (; it_graph != ite_graph; it_graph++) {
-
-		vector<Edge<Node, Road> > aux = (*it_graph)->getAdj();
-		for(unsigned int i = 0; i < aux.size(); i++){
-				gv->addEdge(ID, aux[i].getInfo().getId(), aux[i].getDest()->getInfo().getId(), EdgeType::DIRECTED);
-			ID++;
-		}
-	}*/
-
 
 	gv->rearrange();
 }
