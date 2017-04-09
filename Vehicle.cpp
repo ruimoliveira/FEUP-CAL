@@ -9,7 +9,7 @@
 
 Vehicle::Vehicle(){}
 
-Vehicle::Vehicle(int id, string type, Node position): id(id), type(type), position(position){
+Vehicle::Vehicle(int id, string type, Node * position): id(id), type(type), position(position){
 	this->available = true;
 }
 
@@ -23,11 +23,11 @@ void Vehicle::setAvailable(bool available) {
 	this->available = available;
 }
 
-const Node& Vehicle::getPosition() const {
+const Node* Vehicle::getPosition() const {
 	return position;
 }
 
-void Vehicle::setPosition(const Node& position) {
+void Vehicle::setPosition(Node* position) {
 	this->position = position;
 }
 

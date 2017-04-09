@@ -20,7 +20,7 @@ class Vehicle {
 	int id;
 	string type;
 	bool available;
-	Node position;
+	Node * position;
 public:
 	/**
 	 * @brief Vehicle default constructor. Has no parameters.
@@ -36,7 +36,7 @@ public:
 	 * @param position
 	 * Node where the vehicle is located.
 	 */
-	Vehicle(int id, string type, Node position);
+	Vehicle(int id, string type, Node * position);
 
 	/**
 	 * @brief Vehicle default deconstructor.
@@ -61,12 +61,12 @@ public:
 	/**
 	 * @brief Gets the position of the Vehicle.
 	 */
-	const Node& getPosition() const;
+	const Node* getPosition() const;
 
 	/**
 	 * @brief Sets the position of the Vehicle.
 	 */
-	void setPosition(const Node& position);
+	void setPosition(Node* position);
 
 	/**
 	 * @brief Gets the type of the Vehicle.

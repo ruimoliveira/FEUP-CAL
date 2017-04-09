@@ -174,7 +174,7 @@ vector<Facility> Utils::loadFacilities(){
 		string line, aux, vehicleType;
 		int vehicleID, facilityID;
 		vector<Vehicle> vehicles;
-		Node vehiclePosition, facilityPosition;
+		Node *vehiclePosition, *facilityPosition;
 		unsigned long long position;
 
 		while( !file.eof() ){
@@ -196,7 +196,8 @@ vector<Facility> Utils::loadFacilities(){
 				Facility * facility;
 				for(unsigned int i=0; i<this->nodes.size(); i++){
 					if(nodes[i].getId() == position){
-						facility = new Facility(facilityID, type, &nodes[i]);
+						facilityPosition = &nodes[i];
+						facility = new Facility(facilityID, type, facilityPosition);
 						break;
 					}
 				}
@@ -217,7 +218,8 @@ vector<Facility> Utils::loadFacilities(){
 
 				for(unsigned int i=0; i<this->nodes.size(); i++){
 					if(nodes[i].getId() == position){
-						Vehicle vehicle = Vehicle(vehicleID, vehicleType, nodes[i]);
+						vehiclePosition = &nodes[i];
+						Vehicle vehicle = Vehicle(vehicleID, vehicleType, vehiclePosition);
 						vehicles.push_back(vehicle);
 						break;
 					}
@@ -325,7 +327,7 @@ double Utils::calculaDistanciaVetorVertex(vector<Vertex<Node, Road> *> v){
 
 	double res=0;
 
-	for(int i=0; i<v.size()-1; i++){
+	for(unsigned int i=0; i<v.size()-1; i++){
 		Vertex<Node,Road>* a = v[i];
 		Vertex<Node,Road> * b = v[i+1];
 
@@ -340,7 +342,7 @@ void Utils::displayGraph(){
 	GraphViewer *gv = new GraphViewer(600, 600, false);
 	gv->createWindow(1600, 900);
 	gv->defineEdgeColor(ORANGE);
-	gv->defineVertexColor(BLUE);
+	gv->defineVertexColor(GRAY);
 	gv->defineEdgeCurved(false);
 
 	typename vector<Node>::iterator it_node = nodes.begin();
@@ -373,6 +375,7 @@ void Utils::displayGraph(){
 						/ (maxLat - minLat));
 
 		gv->addNode(it_node->getId(), x, -y);
+		//gv->setVertexLabel(it_node->getId(), ".");
 	}
 
 	typename vector<Gable>::iterator it_gable = connections.begin();
@@ -399,23 +402,21 @@ void Utils::displayGraph(){
 
 	/* TODO: CHANGE FACILITY NODE COLOURS */
 	for(unsigned int i=0; i<this->facilities.size(); i++){
+		facilities[i].printInfo();
 		if(facilities[i].getType().compare("HOSPITAL") == 0){
-			cout << "node id: " << this->facilities[i].getId() << endl;
-			gv->setVertexColor(this->facilities[i].getId(),WHITE);
-			gv->setVertexLabel(this->facilities[i].getId(), "HOSPITAL");
-			it_node->printInfo();
+			gv->setVertexColor(this->facilities[i].getPosition()->getId(),WHITE);
+			gv->setVertexLabel(this->facilities[i].getPosition()->getId(), "HOSPITAL");
 		} else if(facilities[i].getType().compare("POLICESTATION") == 0){
-			cout << "node id: " << this->facilities[i].getId() << endl;
-			gv->setVertexColor(this->facilities[i].getId(),BLUE);
-			gv->setVertexLabel(this->facilities[i].getId(), "POLICESTATION");
-			it_node->printInfo();
+			gv->setVertexColor(this->facilities[i].getPosition()->getId(),BLUE);
+			gv->setVertexLabel(this->facilities[i].getPosition()->getId(), "POLICESTATION");
 		} else if(facilities[i].getType().compare("FIRESTATION") == 0){
-			cout << "node id: " << this->facilities[i].getId() << endl;
-			gv->setVertexColor(this->facilities[i].getId(),RED);
-			gv->setVertexLabel(this->facilities[i].getId(), "FIRESTATION");
-			it_node->printInfo();
+			gv->setVertexColor(this->facilities[i].getPosition()->getId(),RED);
+			gv->setVertexLabel(this->facilities[i].getPosition()->getId(), "FIRESTATION");
 		}
 	}
+
+	gv->setVertexColor(452590809,RED);
+	gv->setVertexLabel(452590809, "FIRESTATION");
 
 	gv->rearrange();
 }
